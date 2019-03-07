@@ -6,21 +6,21 @@ using UIKit;
 
 namespace Plugin.HideShowPassword.iOS
 {
-    public interface IPasswordToggleVissibilityDelegate
+    public interface IPasswordToggleVisibilityDelegate
     {
-        void ViewHasToggled(PasswordToggleVissibilityView view, bool isSelected);
+        void ViewHasToggled(PasswordToggleVisibilityView view, bool isSelected);
     }
 
-    public class PasswordToggleVissibilityView : UIView
+    public class PasswordToggleVisibilityView : UIView
     {
         private UIImage eyeOpenedImage, eyeClosedImage, checkMarkImage;
         private UIButton eyeButton;
         private UIImageView checkmarkImageView;
-        public IPasswordToggleVissibilityDelegate vissibilityDelegate;
+        public IPasswordToggleVisibilityDelegate vissibilityDelegate;
 
-        public PasswordToggleVissibilityView(IntPtr handle) : base(handle) { }
+        public PasswordToggleVisibilityView(IntPtr handle) : base(handle) { }
 
-        public PasswordToggleVissibilityView(CGRect frame) : base(frame)
+        public PasswordToggleVisibilityView(CGRect frame) : base(frame)
         {
             eyeOpenedImage = UIImage.FromBundle("ic_eye_open").ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
             eyeClosedImage = UIImage.FromBundle("ic_eye_closed");

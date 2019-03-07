@@ -12,9 +12,9 @@ namespace Plugin.HideShowPassword.iOS
         bool IsValidPassword(TextField textField, string password);
     }
 
-    public class HideShowPasswordTextField : TextField, IPasswordToggleVissibilityDelegate
+    public class HideShowPasswordTextField : TextField, IPasswordToggleVisibilityDelegate
     {
-        private PasswordToggleVissibilityView passwordToggleVissibilityView;
+        private PasswordToggleVisibilityView passwordToggleVissibilityView;
         public IHideShowPassWordTextFieldDelegate passwordDelegate;
 
 
@@ -68,7 +68,7 @@ namespace Plugin.HideShowPassword.iOS
 
 
 
-        public void ViewHasToggled(PasswordToggleVissibilityView view, bool isSelected)
+        public void ViewHasToggled(PasswordToggleVisibilityView view, bool isSelected)
         {
             string hackString = Text;
             Text = " ";
@@ -81,7 +81,7 @@ namespace Plugin.HideShowPassword.iOS
         private void SetupViews()
         {
             CGRect toggleFrame = new CGRect(0, 0, 66, 40);
-            passwordToggleVissibilityView = new PasswordToggleVissibilityView(toggleFrame);
+            passwordToggleVissibilityView = new PasswordToggleVisibilityView(toggleFrame);
             passwordToggleVissibilityView.vissibilityDelegate = this;
             passwordToggleVissibilityView.CheckMarkVisible = false;
 
@@ -96,7 +96,7 @@ namespace Plugin.HideShowPassword.iOS
             RightView.Frame = RightViewRect(Bounds);
 
             // Default eye state based on our initial secure text entry
-            passwordToggleVissibilityView.EyeStatus = SecureTextEntry ? PasswordToggleVissibilityView.EyeState.Closed : PasswordToggleVissibilityView.EyeState.Open;
+            passwordToggleVissibilityView.EyeStatus = SecureTextEntry ? PasswordToggleVisibilityView.EyeState.Closed : PasswordToggleVisibilityView.EyeState.Open;
         }
 
         void PasswordTextChanged(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace Plugin.HideShowPassword.iOS
 
         public void TextFieldDidEndEditing(UITextField textField)
         {
-            passwordToggleVissibilityView.EyeStatus = PasswordToggleVissibilityView.EyeState.Closed;
+            passwordToggleVissibilityView.EyeStatus = PasswordToggleVisibilityView.EyeState.Closed;
             SecureTextEntry = !Selected;
         }
 
