@@ -13,8 +13,66 @@ HideShowPassword is an easy to use xamarin ios extension of UITextField and/or t
 <a href="samples/"><img  src="assets/sample.gif" width="33%"></a>
 </p>
 
-## NuGet
+## Install NuGet Package
 * [Plugin.HideShowPassword.iOS](http://www.nuget.org/packages/Plugin.HideShowPassword.iOS) [![NuGet](https://img.shields.io/nuget/v/Plugin.HideShowPassword.iOS.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.HideShowPassword.iOS)
+
+## Sample Usage - Native UITextField
+
+View the sample application - * [HideShowPasswordSample](https://github.com/jabusjavus/HideShowPassword/tree/master/HideShowPasswordSample)
+
+1. Add a UITextField to your Storyboard or Nib layout and select HideShowPasswordTextField as the Class
+2. Or just select the Hide Show Password Text Field from toolbox custom controls 
+3. Optionally extend `IHideShowPassWordTextFieldDelegate` and implement `IsValidPassword` to show a checkmark if password is valid and set `passwordDelegate`
+4. Optionally extend `IUITextFieldDelegate` and override `EditingEnded` to reset secure entry when not in focus and set text field `Delegate`
+
+```csharp
+public class ViewController : UIViewController, IHideShowPassWordTextFieldDelegate, IUITextFieldDelegate
+{
+	      protected ViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            InitComponents();
+        }
+
+        void InitComponents()
+        {
+            // Set Delegates on normal UITextField password
+            password.passwordDelegate = this;
+            password.Delegate = this;
+            // Optionally set tint color on right view
+            password.RightView.TintColor = UIColor.Blue;
+        }
+        
+        /* Optionally implement interface member for Native UITextField IsValidPassword, 
+         * To show a checkmark in field if the entered password is correct
+         */
+        public bool IsValidPassword(UITextField textField, string password)
+        {
+            return password.Length > 5;
+        }
+        
+        [Export("textFieldDidEndEditing:")]
+        public void EditingEnded(UITextField textField)
+        {
+            /* After editing of text field was complete, 
+             * you can call the TextFieldDidEndEditing to change it back to a secure text entry.
+             * 
+             * You can set an Accessibility label for these text fields in the UI designer to determine from which textField the editing was ended
+             */            
+            switch (textField.AccessibilityLabel)
+            {
+                case "Password":
+                    password.TextFieldDidEndEditing(textField);
+                    break;
+            }
+
+        }
+}
+```
 
 # License #
 
