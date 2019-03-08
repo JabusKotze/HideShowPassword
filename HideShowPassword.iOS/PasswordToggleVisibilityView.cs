@@ -22,9 +22,9 @@ namespace Plugin.HideShowPassword.iOS
 
         public PasswordToggleVisibilityView(CGRect frame) : base(frame)
         {
-            eyeOpenedImage = UIImage.FromBundle("ic_eye_open").ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
-            eyeClosedImage = UIImage.FromBundle("ic_eye_closed");
-            checkMarkImage = UIImage.FromBundle("ic_password_checkmark").ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+            eyeOpenedImage = UIImage.FromBundle("hsp_eye_open").ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
+            eyeClosedImage = UIImage.FromBundle("hsp_eye_closed");
+            checkMarkImage = UIImage.FromBundle("hsp_password_checkmark").ImageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate);
             eyeButton = new UIButton(UIButtonType.Custom);
             checkmarkImageView = new UIImageView()
             {
